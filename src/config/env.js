@@ -10,6 +10,7 @@ export const env = {
   nodeEnv: process.env.NODE_ENV ?? "development",
   port: Number(process.env.PORT) || 3000,
   databaseUrl: required("DATABASE_URL", process.env.DATABASE_URL),
+  openaiApiKey: process.env.OPENAI_API_KEY ?? "",
   whatsapp: {
     phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID ?? "",
     accessToken: process.env.WHATSAPP_ACCESS_TOKEN ?? "",
