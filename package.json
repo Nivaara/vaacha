@@ -1,0 +1,21 @@
+{
+  "name": "vaacha-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vaacha AI platform — WhatsApp Cloud API backend (Express + PostgreSQL)",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "axios": "^1.14.0",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
+  }
+}
