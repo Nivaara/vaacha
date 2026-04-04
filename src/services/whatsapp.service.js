@@ -1,7 +1,7 @@
 import axios from "axios";
 import { env } from "../config/env.js";
 
-const GRAPH_API_VERSION = "v21.0";
+const GRAPH_API_VERSION = "v25.0";
 
 /**
  * @param {string} to E.164-style recipient (with or without leading +)
