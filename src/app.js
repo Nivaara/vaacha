@@ -1,4 +1,5 @@
 import express from "express";
+import { knowledgeRouter } from "./routes/knowledge.routes.js";
 import { rootRouter } from "./routes/index.js";
 import { whatsappRouter } from "./routes/whatsapp.routes.js";
 
@@ -9,6 +10,7 @@ export function createApp() {
   app.use(express.urlencoded({ extended: true }));
 
   app.use("/", rootRouter);
+  app.use("/knowledge", knowledgeRouter);
   app.use("/whatsapp", whatsappRouter);
 
   return app;

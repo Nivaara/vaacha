@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { env } from "../config/env.js";
 import { chat } from "../services/openai.service.js";
+import {
+  buildRagSystemPrompt,
+  retrieveTopChunks,
+} from "../services/rag.service.js";
 import { sendMessage } from "../services/whatsapp.service.js";
 
 const HUB_MODE = "hub.mode";
@@ -69,7 +73,17 @@ async function processIncomingWebhook(payload) {
 
   for (const { from, text } of items) {
     try {
-      const reply = await chat(text, SYSTEM_PROMPT);
+      let systemPrompt = SYSTEM_PROMPT;
+      if (env.ragKnowledgeBaseId) {
+        const chunks = await retrieveTopChunks({
+          knowledgeBaseId: env.ragKnowledgeBaseId,
+          queryText: text,
+          k: 5,
+        });
+        systemPrompt = buildRagSystemPrompt(SYSTEM_PROMPT, chunks);
+      }
+
+      const reply = await chat(text, systemPrompt);
       await sendMessage(from, reply);
     } catch (err) {
       console.error("WhatsApp reply pipeline error:", err);
